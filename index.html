@@ -3,40 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dropdown Menu Example</title>
+    <title>Image Carousel</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="dropdown">
-            <button class="dropdown-trigger">Products</button>
-            <div class="dropdown-content">
-                <a href="#">Electronics</a>
-                <a href="#">Clothing</a>
-                <a href="#">Books</a>
-                <a href="#">Sports</a>
+    <div class="carousel-container">
+        <div class="carousel">
+            <div class="carousel-track">
+                <div class="carousel-slide">
+                    <img src="https://picsum.photos/800/400?random=1" alt="Slide 1">
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://picsum.photos/800/400?random=2" alt="Slide 2">
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://picsum.photos/800/400?random=3" alt="Slide 3">
+                </div>
             </div>
-        </div>
 
-        <div class="dropdown">
-            <button class="dropdown-trigger">Services</button>
-            <div class="dropdown-content">
-                <a href="#">Consulting</a>
-                <a href="#">Training</a>
-                <a href="#">Support</a>
-            </div>
-        </div>
+            <button class="carousel-button prev">❮</button>
+            <button class="carousel-button next">❯</button>
 
-        <div class="dropdown">
-            <button class="dropdown-trigger">About</button>
-            <div class="dropdown-content">
-                <a href="#">Company</a>
-                <a href="#">Team</a>
-                <a href="#">Careers</a>
-            </div>
+            <div class="carousel-dots"></div>
         </div>
-    </nav>
-
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
