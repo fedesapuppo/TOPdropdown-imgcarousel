@@ -30,6 +30,7 @@ class Carousel {
         this.nextButton = element.querySelector('.next');
         this.prevButton = element.querySelector('.prev');
         this.dotsContainer = element.querySelector('.carousel-dots');
+        this.refreshButton = document.querySelector('.refresh-button');
 
         this.currentSlide = 0;
         this.slideCount = this.slides.length;
@@ -51,9 +52,45 @@ class Carousel {
         // Add event listeners
         this.nextButton.addEventListener('click', () => this.next());
         this.prevButton.addEventListener('click', () => this.prev());
+        this.refreshButton.addEventListener('click', () => this.fetchNewImages());
 
         // Start auto-advance
         this.startAutoAdvance();
+    }
+
+    async fetchNewImages() {
+        // Disable the button while loading
+        this.refreshButton.disabled = true;
+        this.refreshButton.textContent = 'Loading...';
+
+        try {
+            // Fetch new images for each slide
+            for (let i = 0; i < this.slides.length; i++) {
+                const img = this.slides[i].querySelector('img');
+                // Add a timestamp to prevent caching
+                const timestamp = new Date().getTime();
+                img.src = `https://picsum.photos/800/400?random=${timestamp + i}`;
+
+                // Wait for the image to load
+                await new Promise((resolve, reject) => {
+                    img.onload = resolve;
+                    img.onerror = reject;
+                });
+            }
+
+            // Reset to first slide
+            this.currentSlide = 0;
+            this.updateTrack();
+            this.updateDots();
+            this.resetAutoAdvance();
+        } catch (error) {
+            console.error('Error loading new images:', error);
+            alert('Failed to load new images. Please try again.');
+        } finally {
+            // Re-enable the button
+            this.refreshButton.disabled = false;
+            this.refreshButton.textContent = 'Get New Images';
+        }
     }
 
     createDots() {
